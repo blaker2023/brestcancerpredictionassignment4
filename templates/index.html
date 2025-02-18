@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breast Cancer Prediction</title>
+</head>
+<body>
+    <h1>Breast Cancer Prediction</h1>
+    <form action="/predict" method="post">
+        <label>Clump Thickness:</label><input type="number" step="any" name="Clump_Thickness"><br>
+        <label>Uniformity of Cell Size:</label><input type="number" step="any" name="Uniformity_Cell_Size"><br>
+        <label>Uniformity of Cell Shape:</label><input type="number" step="any" name="Uniformity_Cell_Shape"><br>
+        <label>Marginal Adhesion:</label><input type="number" step="any" name="Marginal_Adhesion"><br>
+        <label>Single Epithelial Cell Size:</label><input type="number" step="any" name="Single_Epithelial_Cell_Size"><br>
+        <label>Bare Nuclei:</label><input type="number" step="any" name="Bare_Nuclei"><br>
+        <label>Bland Chromatin:</label><input type="number" step="any" name="Bland_Chromatin"><br>
+        <label>Normal Nucleoli:</label><input type="number" step="any" name="Normal_Nucleoli"><br>
+        <label>Mitoses:</label><input type="number" step="any" name="Mitoses"><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+    {% endif %}
+</body>
+</html>
