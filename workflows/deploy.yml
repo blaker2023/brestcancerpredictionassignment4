@@ -1,0 +1,34 @@
+name: Deploy to Heroku  # Name of the CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - main  # Runs when code is pushed to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Runs on a virtual machine
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Clones the GitHub repository
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Login to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
+
+      - name: Deploy to Heroku
+        run: |
+          heroku container:login
+          heroku container:push web --app brestcancerpredictionassign4
+          heroku container:release web --app brestcancerpredictionassign4
